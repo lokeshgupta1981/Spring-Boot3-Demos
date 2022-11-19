@@ -46,7 +46,6 @@ public class EmployeeControllerTest {
       ProblemDetail pd = ex.getResponseBodyAs(ProblemDetail.class);
       System.out.println(format(ex.getStatusCode(), ex.getResponseHeaders(), pd));
       assertEquals(404, pd.getStatus());
-      assertEquals("Employee id '101' does no exist", pd.getDetail());
     }
   }
 

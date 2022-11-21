@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <appender name="Console"
+    class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>
+        %green(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1}): %msg%n%throwable
+      </Pattern>
+    </layout>
+  </appender>
+
+  <logger name="org.springframework.web" level="debug"/>
+  <logger name="com.example" level="debug" additivity="false">
+    <appender-ref ref="Console"/>
+  </logger>
+
+  <root level="info">
+    <appender-ref ref="Console"/>
+  </root>
+</configuration>

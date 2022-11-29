@@ -2,7 +2,7 @@ package com.howtodoinjava.web;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.howtodoinjava.model.Employee;
+import com.howtodoinjava.app.model.Employee;
 import java.net.URI;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;

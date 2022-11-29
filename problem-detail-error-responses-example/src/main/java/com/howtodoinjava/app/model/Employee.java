@@ -1,4 +1,4 @@
-package com.howtodoinjava.model;
+package com.howtodoinjava.app.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

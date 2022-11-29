@@ -1,11 +1,10 @@
 package com.howtodoinjava.web;
 
 import com.howtodoinjava.errors.RecordNotFoundException;
-import com.howtodoinjava.model.Employee;
+import com.howtodoinjava.app.model.Employee;
 import java.net.URI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponseException;

@@ -4,6 +4,7 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 
 import com.howtodoinjava.app.model.FileUploadCommand;
+import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.buffer.DataBuffer;
@@ -24,10 +25,11 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @Slf4j
+@SuppressWarnings("unused")
 public class FileUploadController {
 
   @PostMapping(value = "simple-form-upload", consumes = MULTIPART_FORM_DATA_VALUE)
-  public ResponseEntity handleFileUploadForm(FileUploadCommand form) {
+  public ResponseEntity<Map<String, String>> handleFileUploadForm(FileUploadCommand form) {
 
     log.info("uploading form data: {}", form);
 
@@ -39,7 +41,7 @@ public class FileUploadController {
   }
 
   @PostMapping(value = "upload-with-request-parts", consumes = MULTIPART_FORM_DATA_VALUE)
-  public ResponseEntity handleRequestParts(@RequestPart("name") String name,
+  public ResponseEntity<Map<String, String>> handleRequestParts(@RequestPart("name") String name,
       @RequestPart("file") FilePart file) {
     log.info("handling request parts: {}, {}", name, file);
     var result = Map.of(
@@ -50,7 +52,7 @@ public class FileUploadController {
   }
 
   @PostMapping(value = "upload-with-multi-value-map", consumes = MULTIPART_FORM_DATA_VALUE)
-  public ResponseEntity handleMultiValueMap(@RequestBody Mono<MultiValueMap<String, Part>> parts) {
+  public ResponseEntity<Mono<List<String>>> handleMultiValueMap(@RequestBody Mono<MultiValueMap<String, Part>> parts) {
     log.debug("handling multi values: {}", parts);
     var partNames = parts.map
             (p -> p.keySet().stream().map(key -> p.getFirst(key).name()).toList())

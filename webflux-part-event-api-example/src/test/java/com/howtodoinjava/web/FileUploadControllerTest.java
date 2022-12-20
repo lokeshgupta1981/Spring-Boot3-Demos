@@ -7,10 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.http.codec.multipart.FilePartEvent;
 import org.springframework.http.codec.multipart.FormPartEvent;
 import org.springframework.http.codec.multipart.PartEvent;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.web.reactive.function.BodyInserters;
 import reactor.core.publisher.Flux;
 
 @WebFluxTest
@@ -22,7 +25,7 @@ public class FileUploadControllerTest {
   @Autowired
   WebTestClient client;
 
-  /*@Test
+  @Test
   public void testHandleSimpleFileUpload() {
     MultipartBodyBuilder multipartBodyBuilder = new MultipartBodyBuilder();
     multipartBodyBuilder.part("name", "test");
@@ -70,7 +73,7 @@ public class FileUploadControllerTest {
         .expectStatus().isOk()
         .expectBody()
         .jsonPath("$.size()").isEqualTo(2);
-  }*/
+  }
 
   @Test
   public void testUploadUsingPartEvents() {

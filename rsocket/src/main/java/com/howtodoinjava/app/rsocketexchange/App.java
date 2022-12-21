@@ -23,8 +23,8 @@ public class App implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    RSocketRequester rSocketRequester = requesterBuilder.tcp("localhost", 7000);
-    RSocketServiceProxyFactory factory = RSocketServiceProxyFactory.builder(rSocketRequester).build();
+    RSocketRequester rsocketRequester = requesterBuilder.tcp("localhost", 7000);
+    RSocketServiceProxyFactory factory = RSocketServiceProxyFactory.builder(rsocketRequester).build();
 
     MessageService service = factory.createClient(MessageService.class);
 

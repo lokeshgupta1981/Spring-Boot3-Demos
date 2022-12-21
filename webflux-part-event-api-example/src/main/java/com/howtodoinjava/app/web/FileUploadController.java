@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -27,6 +28,18 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @SuppressWarnings("unused")
 public class FileUploadController {
+
+  @PostMapping(value = "simple-form-upload-mvc", consumes = MULTIPART_FORM_DATA_VALUE)
+  public ResponseEntity<Map<String, String>> handleFileUploadForm(@RequestPart("name") String name,
+      @RequestPart("file") MultipartFile file) {
+
+    log.info("handling request parts: {}, {}", name, file);
+    var result = Map.of(
+        "name", name,
+        "filename", file.getOriginalFilename()
+    );
+    return ok().body(result);
+  }
 
   @PostMapping(value = "simple-form-upload", consumes = MULTIPART_FORM_DATA_VALUE)
   public ResponseEntity<Map<String, String>> handleFileUploadForm(FileUploadCommand form) {

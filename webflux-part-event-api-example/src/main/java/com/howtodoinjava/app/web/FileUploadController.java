@@ -4,11 +4,19 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 
 import com.howtodoinjava.app.model.FileUploadCommand;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.http.codec.multipart.FilePartEvent;
@@ -21,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -30,15 +39,39 @@ import reactor.core.publisher.Mono;
 public class FileUploadController {
 
   @PostMapping(value = "simple-form-upload-mvc", consumes = MULTIPART_FORM_DATA_VALUE)
-  public ResponseEntity<Map<String, String>> handleFileUploadForm(@RequestPart("name") String name,
-      @RequestPart("file") MultipartFile file) {
+  public ResponseEntity<Map<String, String>> handleFileUploadForm(
+      @RequestPart("file") MultipartFile file)
+      throws IOException {
 
-    log.info("handling request parts: {}, {}", name, file);
-    var result = Map.of(
-        "name", name,
-        "filename", file.getOriginalFilename()
-    );
-    return ok().body(result);
+    log.info("handling request parts: {}", file);
+
+    try {
+
+      File f = new ClassPathResource("").getFile();
+      final Path path = Paths.get(
+          f.getAbsolutePath() + File.separator + "static" + File.separator + "image");
+
+      if (!Files.exists(path)) {
+        Files.createDirectories(path);
+      }
+      Path filePath = path.resolve(file.getOriginalFilename());
+      Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+      String fileUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+          .path("/image/")
+          .path(file.getOriginalFilename())
+          .toUriString();
+
+      var result = Map.of(
+          "filename", file.getOriginalFilename(),
+          "fileUri", fileUri
+      );
+      return ok().body(result);
+    } catch (IOException e) {
+
+      log.error(e.getMessage());
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @PostMapping(value = "simple-form-upload", consumes = MULTIPART_FORM_DATA_VALUE)
@@ -65,7 +98,8 @@ public class FileUploadController {
   }
 
   @PostMapping(value = "upload-with-multi-value-map", consumes = MULTIPART_FORM_DATA_VALUE)
-  public ResponseEntity<Mono<List<String>>> handleMultiValueMap(@RequestBody Mono<MultiValueMap<String, Part>> parts) {
+  public ResponseEntity<Mono<List<String>>> handleMultiValueMap(
+      @RequestBody Mono<MultiValueMap<String, Part>> parts) {
     log.debug("handling multi values: {}", parts);
     var partNames = parts.map
             (p -> p.keySet().stream().map(key -> p.getFirst(key).name()).toList())

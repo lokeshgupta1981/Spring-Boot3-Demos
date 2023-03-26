@@ -22,3 +22,21 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+/mybatis-example/target/classes/application.properties
+/rsocket/target/classes/application.properties
+/virtual-threads-demo/target/classes/application.properties
+/.idea/aws.xml
+/.idea/compiler.xml
+/mybatis-example/target/classes/data.sql
+/.idea/dbnavigator.xml
+/.idea/encodings.xml
+/.idea/jarRepositories.xml
+/.idea/jpa-buddy.xml
+/declarative-http-client-example/target/classes/logback.xml
+/mybatis-example/target/classes/logback.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/mybatis-example/target/classes/schema.sql
+/.idea/Spring-Boot3-Demos.iml
+/.idea/uiDesigner.xml
+/.idea/vcs.xml

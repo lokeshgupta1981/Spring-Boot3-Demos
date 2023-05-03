@@ -45,6 +45,7 @@
     <module>rsocket</module>
     <module>virtual-threads-demo</module>
     <module>webflux-part-event-api-example</module>
+    <module>spring-boot-hateoas</module>
   </modules>
 
   <build>

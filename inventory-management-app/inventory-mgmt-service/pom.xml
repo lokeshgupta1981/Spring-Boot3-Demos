@@ -2,20 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.2</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<groupId>com.howtodoinjava</groupId>
+		<artifactId>Spring-Boot3-Demos</artifactId>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
+
 	<groupId>com.howtodoinjava</groupId>
 	<artifactId>inventory-mgmt-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>inventory-mgmt-service</name>
 	<description>Spring Boot service code for inventory management</description>
 	<properties>
-		<java.version>17</java.version>
 		<testcontainers.version>1.17.6</testcontainers.version>
+		<spring-restdocs.version>3.0.0</spring-restdocs.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -54,23 +55,8 @@
 			<artifactId>mysql-connector-j</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.restdocs</groupId>
 			<artifactId>spring-restdocs-mockmvc</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

@@ -44,9 +44,7 @@
         <configuration>
           <source>19</source>
           <target>19</target>
-          <compilerArgs>
-            <arg>--enable-preview</arg>
-          </compilerArgs>
+          <compilerArgs>--enable-preview</compilerArgs>
         </configuration>
       </plugin>
       <plugin>

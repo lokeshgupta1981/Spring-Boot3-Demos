@@ -14,7 +14,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.0.6</version>
+    <version>3.1.0</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -46,6 +46,8 @@
     <module>virtual-threads-demo</module>
     <module>webflux-part-event-api-example</module>
     <module>spring-boot-hateoas</module>
+    <module>security</module>
+    <module>rest-api-crud-example</module>
   </modules>
 
   <build>

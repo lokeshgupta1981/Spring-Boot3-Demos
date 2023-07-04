@@ -48,6 +48,7 @@
     <module>spring-boot-hateoas</module>
     <module>security</module>
     <module>rest-api-crud-example</module>
+    <module>async-controller-example</module>
   </modules>
 
   <build>

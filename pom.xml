@@ -50,6 +50,7 @@
     <module>rest-api-crud-example</module>
     <module>async-controller-example</module>
     <module>ehcache-example</module>
+    <module>task-scheduler</module>
   </modules>
 
   <build>

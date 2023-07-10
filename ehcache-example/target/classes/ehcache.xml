@@ -1,0 +1,32 @@
+<config
+  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+  xmlns='http://www.ehcache.org/v3'
+  xmlns:jsr107='http://www.ehcache.org/v3/jsr107'>
+
+  <service>
+    <jsr107:defaults enable-statistics="true"/>
+  </service>
+
+  <cache alias="employeeCache">
+    <key-type>java.lang.Long</key-type>
+    <value-type>com.howtodoinjava.model.Employee</value-type>
+    <expiry>
+      <ttl unit="seconds">10000</ttl>
+    </expiry>
+    <listeners>
+      <listener>
+        <class>com.howtodoinjava.caching.CustomCacheEventLogger</class>
+        <event-firing-mode>ASYNCHRONOUS</event-firing-mode>
+        <event-ordering-mode>UNORDERED</event-ordering-mode>
+        <events-to-fire-on>CREATED</events-to-fire-on>
+        <events-to-fire-on>UPDATED</events-to-fire-on>
+        <events-to-fire-on>EXPIRED</events-to-fire-on>
+        <events-to-fire-on>REMOVED</events-to-fire-on>
+        <events-to-fire-on>EVICTED</events-to-fire-on>
+      </listener>
+    </listeners>
+    <resources>
+      <offheap unit="MB">100</offheap>
+    </resources>
+  </cache>
+</config>

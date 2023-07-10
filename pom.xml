@@ -49,6 +49,7 @@
     <module>security</module>
     <module>rest-api-crud-example</module>
     <module>async-controller-example</module>
+    <module>ehcache-example</module>
   </modules>
 
   <build>

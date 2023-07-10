@@ -1,6 +1,5 @@
 package com.howtodoinjava.model;
 
-import java.io.Serial;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -51,6 +51,7 @@
     <module>async-controller-example</module>
     <module>ehcache-example</module>
     <module>task-scheduler</module>
+    <module>jsp-demo</module>
   </modules>
 
   <build>

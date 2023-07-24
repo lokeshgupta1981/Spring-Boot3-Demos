@@ -9,7 +9,7 @@
 
   <cache alias="employeeCache">
     <key-type>java.lang.Long</key-type>
-    <value-type>com.howtodoinjava.model.Employee</value-type>
+    <value-type>com.company.Employee</value-type>
     <expiry>
       <ttl unit="seconds">10000</ttl>
     </expiry>
@@ -26,6 +26,7 @@
       </listener>
     </listeners>
     <resources>
+      <heap unit="entries">2000</heap>
       <offheap unit="MB">100</offheap>
     </resources>
   </cache>

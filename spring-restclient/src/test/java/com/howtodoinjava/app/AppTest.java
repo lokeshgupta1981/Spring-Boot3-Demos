@@ -40,7 +40,7 @@ public class AppTest {
   @Test
   public void testGetAll() {
 
-    List<Employee> employeeList = restClient.get()
+    List<com.howtodoinjava.app.model.Employee> employeeList = restClient.get()
         .uri("/employees")
         .accept(MediaType.APPLICATION_JSON)
         .retrieve()
@@ -67,11 +67,11 @@ public class AppTest {
   @Test
   public void testGetById() {
 
-    Employee employee = restClient.get()
+    com.howtodoinjava.app.model.Employee employee = restClient.get()
         .uri("/employees/1")
         .accept(MediaType.APPLICATION_JSON)
         .retrieve()
-        .body(Employee.class);
+        .body(com.howtodoinjava.app.model.Employee.class);
 
     Assertions.assertNotNull(employee);
     Assertions.assertEquals(1, employee.getId());
@@ -82,7 +82,7 @@ public class AppTest {
   @Test
   public void testPostAndDelete() {
 
-    Employee newEmployee = new Employee(5l, "Amit", "active");
+    com.howtodoinjava.app.model.Employee newEmployee = new com.howtodoinjava.app.model.Employee(5l, "Amit", "active");
 
     ResponseEntity<Void> responseEntity = restClient.post()
         .uri("/employees")
@@ -106,23 +106,23 @@ public class AppTest {
   @Test
   public void testPut() {
 
-    Employee employee = restClient.get()
+    com.howtodoinjava.app.model.Employee employee = restClient.get()
         .uri("/employees/1")
         .accept(MediaType.APPLICATION_JSON)
         .retrieve()
-        .body(Employee.class);
+        .body(com.howtodoinjava.app.model.Employee.class);
 
     String originalName = employee.getName();
 
     employee.setName("Updated_Name-" + originalName);
 
-    ResponseEntity<Employee> responseEntity = restClient.put()
+    ResponseEntity<com.howtodoinjava.app.model.Employee> responseEntity = restClient.put()
         .uri("/employees/1")
         .contentType(MediaType.APPLICATION_JSON)
         .accept(MediaType.APPLICATION_JSON)
         .body(employee)
         .retrieve()
-        .toEntity(Employee.class);
+        .toEntity(com.howtodoinjava.app.model.Employee.class);
 
     Assertions.assertEquals(HttpStatus.OK.value(), responseEntity.getStatusCode().value());
     Assertions.assertEquals(employee.getName(), responseEntity.getBody().getName());
@@ -135,7 +135,7 @@ public class AppTest {
         .accept(MediaType.APPLICATION_JSON)
         .body(employee)
         .retrieve()
-        .toEntity(Employee.class);
+        .toEntity(com.howtodoinjava.app.model.Employee.class);
   }
 
   @Test
@@ -144,11 +144,11 @@ public class AppTest {
     HttpClientErrorException thrown = Assertions.assertThrows(HttpClientErrorException.class,
         () -> {
 
-          Employee employee = restClient.get()
+          com.howtodoinjava.app.model.Employee employee = restClient.get()
               .uri("/employees/5")
               .accept(MediaType.APPLICATION_JSON)
               .retrieve()
-              .body(Employee.class);
+              .body(com.howtodoinjava.app.model.Employee.class);
         });
 
     Assertions.assertEquals(404, thrown.getStatusCode().value());
@@ -157,7 +157,7 @@ public class AppTest {
   @Test
   public void testExchangeMethod() {
 
-    List<Employee> list = restClient.get()
+    List<com.howtodoinjava.app.model.Employee> list = restClient.get()
         .uri("/employees")
         .accept(MediaType.APPLICATION_JSON)
         .exchange((request, response) -> {

@@ -2,6 +2,7 @@ package com.howtodoinjava.app;
 
 import com.howtodoinjava.app.model.User;
 import com.howtodoinjava.app.web.UserClient;
+import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,7 +25,8 @@ public class App implements CommandLineRunner {
   public void run(String... args) throws Exception {
 
     //Get All Users
-    userClient.getAll().subscribe(
+    String headerValue = UUID.randomUUID().toString();
+    userClient.getAll(headerValue).subscribe(
         data -> log.info("User: {}", data)
     );
 
@@ -36,7 +38,7 @@ public class App implements CommandLineRunner {
     //Create a New User
     userClient.save(new User(null, "Lokesh", "lokesh", "admin@email.com"))
         .log()
-        /*.flatMap(user -> {
+        .flatMap(user -> {
               var uri = user.getHeaders().getLocation().toString();
               var strings = uri.split("/");
               return userClient.getById(Long.valueOf(strings[strings.length - 1]))
@@ -46,7 +48,7 @@ public class App implements CommandLineRunner {
                     return u;
                   });
             }
-        )*/.subscribe(
+        ).subscribe(
             data -> log.info("User: {}", data)
         );
     ;

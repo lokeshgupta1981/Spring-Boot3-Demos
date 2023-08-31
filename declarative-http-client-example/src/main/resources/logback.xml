@@ -10,7 +10,7 @@
     </layout>
   </appender>
 
-  <logger name="org.springframework.web" level="debug"/>
+  <logger name="org.springframework.web" level="TRACE"/>
   <logger name="com.example" level="debug" additivity="false">
     <appender-ref ref="Console"/>
   </logger>

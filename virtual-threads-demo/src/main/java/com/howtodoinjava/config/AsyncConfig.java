@@ -15,13 +15,16 @@ public class AsyncConfig {
 
   @Bean(TaskExecutionAutoConfiguration.APPLICATION_TASK_EXECUTOR_BEAN_NAME)
   public AsyncTaskExecutor asyncTaskExecutor() {
-    return new TaskExecutorAdapter(Executors.newVirtualThreadPerTaskExecutor());
+    //TODO: Enable in Java 20
+    //return new TaskExecutorAdapter(Executors.newVirtualThreadPerTaskExecutor());
+    return new TaskExecutorAdapter(Executors.newSingleThreadExecutor());
   }
 
   @Bean
   public TomcatProtocolHandlerCustomizer<?> protocolHandlerVirtualThreadExecutorCustomizer() {
     return protocolHandler -> {
-      protocolHandler.setExecutor(Executors.newVirtualThreadPerTaskExecutor());
+      //TODO: Enable in Java 20
+      //protocolHandler.setExecutor(Executors.newVirtualThreadPerTaskExecutor());
     };
   }
 }

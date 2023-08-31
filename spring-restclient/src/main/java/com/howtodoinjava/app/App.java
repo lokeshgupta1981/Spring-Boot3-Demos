@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.FileAttribute;
+import java.nio.file.attribute.PosixFilePermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -36,6 +38,13 @@ public class App implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
+
+    FileAttribute<?>[] attributes = {
+        PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rw-r--r--"))
+    };
+    Path tempFile = Files.createTempFile(Files.createTempDirectory("temp-dir"), "testData-", ".txt", attributes);
+
+    System.out.println(tempFile.toAbsolutePath().toString());
 
     webClient.post()
         .uri("/employees")

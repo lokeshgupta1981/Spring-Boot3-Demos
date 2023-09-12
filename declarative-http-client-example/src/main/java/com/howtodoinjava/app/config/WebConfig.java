@@ -3,6 +3,7 @@ package com.howtodoinjava.app.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.howtodoinjava.app.web.UserClient;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
@@ -13,6 +14,9 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 @Configuration
 public class WebConfig {
 
+  @Autowired
+  DynamicHeaderFilter dynamicHeaderFilter;
+
   @Bean
   WebClient webClient(ObjectMapper objectMapper) {
     return WebClient.builder()
@@ -20,6 +24,7 @@ public class WebConfig {
             c.defaultCodecs().enableLoggingRequestDetails(true)).build()
         )
         .defaultHeaders(header -> header.setBasicAuth("username", "password"))
+        .filter(dynamicHeaderFilter)
         .baseUrl("https://jsonplaceholder.typicode.com/")
         .build();
   }

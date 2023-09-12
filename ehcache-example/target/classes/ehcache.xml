@@ -9,7 +9,7 @@
 
   <cache alias="employeeCache">
     <key-type>java.lang.Long</key-type>
-    <value-type>com.company.Employee</value-type>
+    <value-type>com.howtodoinjava.model.Employee</value-type>
     <expiry>
       <ttl unit="seconds">10000</ttl>
     </expiry>

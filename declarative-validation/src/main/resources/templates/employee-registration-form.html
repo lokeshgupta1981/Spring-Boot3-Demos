@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Registration</title>
+</head>
+<body>
+
+<h2>Employee Registration Form</h2>
+
+<!-- Employee Registration Form -->
+<form action="./processRegistration" method="post" th:object="${employee}">
+
+    <!-- Display validation errors, if any -->
+    <div th:if="${#fields.hasErrors('*')}">
+        <div style="color: red;">
+            <p th:each="error : ${#fields.errors('*')}" th:text="${error}"></p>
+        </div>
+    </div>
+
+    <!-- Employee ID (assuming it's a hidden field for registration) -->
+    <input type="hidden" th:field="*{id}" />
+
+    <!-- Employee First Name -->
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" th:field="*{firstName}" required />
+    <span th:if="${#fields.hasErrors('firstName')}" th:text="#{error.field.size}"></span>
+    <br/>
+
+    <!-- Employee Last Name -->
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" th:field="*{lastName}" required />
+    <span th:if="${#fields.hasErrors('lastName')}" th:text="#{error.field.size}"></span>
+    <br/>
+
+    <!-- Employee Email -->
+    <label for="email">Email:</label>
+    <input type="email" id="email" th:field="*{email}" required />
+    <span th:if="${#fields.hasErrors('email')}" th:text="#{error.field.size}"></span>
+    <br/>
+
+    <!-- Employee Active Status -->
+    <label for="active">Active:</label>
+    <input type="checkbox" id="active" th:field="*{active}" />
+    <br/>
+
+    <!-- Submit Button -->
+    <button type="submit">Register</button>
+
+</form>
+
+</body>
+</html>

@@ -19,6 +19,8 @@ import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
+import org.springframework.web.util.DefaultUriBuilderFactory;
+import org.springframework.web.util.UriTemplateHandler;
 import reactor.core.publisher.Mono;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -35,7 +37,9 @@ public class EmployeeControllerTest {
     String baseUrl = "http://localhost:" + this.port;
     this.webClient = WebClient.builder().baseUrl(baseUrl).build();
     this.restTemplate = new RestTemplate();
-    this.restTemplate.setUriTemplateHandler(new RootUriTemplateHandler(baseUrl));
+    DefaultUriBuilderFactory defaultUriBuilderFactory = new DefaultUriBuilderFactory(baseUrl);
+    defaultUriBuilderFactory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.VALUES_ONLY);
+    this.restTemplate.setUriTemplateHandler(defaultUriBuilderFactory);
   }
 
   @Test

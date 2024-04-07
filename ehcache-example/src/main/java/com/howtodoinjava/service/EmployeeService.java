@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Log
 public class EmployeeService
 {
-  static Map<Long, Employee> db = new HashMap<>();
+   static Map<Long, Employee> db = new HashMap<>();
 
   static {
     db.put(1L, new Employee(1L, "Alex", "Gussin"));

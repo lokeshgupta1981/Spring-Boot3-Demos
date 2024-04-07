@@ -11,6 +11,6 @@ public class AppEventListener {
   @EventListener
   @Async
   public void onGreetingEvent(String message) {
-    log.info(Thread.currentThread().toString() + " :: Received: {}", message);
+    log.info(Thread.currentThread() + " :: Received: {}", message);
   }
 }

@@ -18,7 +18,7 @@ public class WebConfig {
   DynamicHeaderFilter dynamicHeaderFilter;
 
   @Bean
-  WebClient webClient(ObjectMapper objectMapper) {
+  WebClient webClient(/*ObjectMapper objectMapper*/) {
     return WebClient.builder()
         .exchangeStrategies(ExchangeStrategies.builder().codecs(c ->
             c.defaultCodecs().enableLoggingRequestDetails(true)).build()
@@ -33,7 +33,7 @@ public class WebConfig {
   @Bean
   UserClient postClient(WebClient webClient) {
     HttpServiceProxyFactory httpServiceProxyFactory =
-        HttpServiceProxyFactory.builder(WebClientAdapter.forClient(webClient))
+        HttpServiceProxyFactory.builderFor(WebClientAdapter.create(webClient))
             .build();
     return httpServiceProxyFactory.createClient(UserClient.class);
   }

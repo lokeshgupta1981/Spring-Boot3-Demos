@@ -200,8 +200,7 @@ class WebConfiguration {
 
   @Bean
   public RestTemplate restTemplate() {
-    RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory());
-    return restTemplate;
+    return new RestTemplate(clientHttpRequestFactory());
   }
 
   @Bean

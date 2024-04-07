@@ -6,7 +6,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
     ports:
-      - 3306:3306
+      - "3306:3306"
     volumes:
       - mysql_db_data_container:/var/lib/mysql
   adminer_container:
@@ -14,7 +14,7 @@ services:
     environment:
       ADMINER_DEFAULT_SERVER: mysql_db_container
     ports:
-      - 8080:8080
+      - "8080:8080"
 
 volumes:
   mysql_db_data_container:

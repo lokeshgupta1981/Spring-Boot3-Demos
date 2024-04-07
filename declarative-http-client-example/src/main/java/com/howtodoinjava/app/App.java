@@ -51,7 +51,6 @@ public class App implements CommandLineRunner {
         ).subscribe(
             data -> log.info("User: {}", data)
         );
-    ;
 
     //Delete User By Id
     userClient.delete(1L).subscribe(

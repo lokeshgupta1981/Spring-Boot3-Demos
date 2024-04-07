@@ -18,7 +18,6 @@ public class WebConfig {
     //clientBuilder.setDefaultRequestConfig();
     CloseableHttpAsyncClient client = clientBuilder.build();
     ClientHttpConnector connector = new HttpComponentsClientHttpConnector(client);
-    WebClient webClient = WebClient.builder().clientConnector(connector).build();
-    return webClient;
+    return WebClient.builder().clientConnector(connector).build();
   }
 }

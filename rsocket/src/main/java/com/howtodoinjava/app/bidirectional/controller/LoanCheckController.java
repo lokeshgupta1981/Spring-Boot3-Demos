@@ -15,10 +15,7 @@ public class LoanCheckController {
     return loanDetails
         .doOnNext(ld -> log.info("Calculating eligibility:  {}", ld))
         .map(ld -> {
-          if(ld.getRate() > 9)
-            return true;
-          else
-            return false;
+          return ld.getRate() > 9;
         });
   }
 }

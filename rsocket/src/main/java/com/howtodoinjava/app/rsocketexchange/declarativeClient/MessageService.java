@@ -8,6 +8,6 @@ import reactor.core.publisher.Mono;
 public interface MessageService {
 
   @RSocketExchange("greeting/{name}")
-  public Mono<String> sendMessage(@DestinationVariable("name") String name,
+  Mono<String> sendMessage(@DestinationVariable("name") String name,
       @Payload Mono<String> greetingMono);
 }

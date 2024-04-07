@@ -44,7 +44,7 @@ public class App implements CommandLineRunner {
     };
     Path tempFile = Files.createTempFile(Files.createTempDirectory("temp-dir"), "testData-", ".txt", attributes);
 
-    System.out.println(tempFile.toAbsolutePath().toString());
+    System.out.println(tempFile.toAbsolutePath());
 
     webClient.post()
         .uri("/employees")

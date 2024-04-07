@@ -67,7 +67,7 @@ public class HttpClientConfig {
   public CloseableHttpClient httpClient() {
     RequestConfig requestConfig = RequestConfig.custom()
         .setConnectionRequestTimeout(Timeout.of(Duration.ofMillis(REQUEST_TIMEOUT)))
-        .setConnectTimeout(Timeout.of(Duration.ofMillis(CONNECT_TIMEOUT)))
+        .setResponseTimeout(Timeout.of(Duration.ofMillis(CONNECT_TIMEOUT)))
         .build();
     return HttpClients.custom()
         .setDefaultRequestConfig(requestConfig)

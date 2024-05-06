@@ -1,32 +1,49 @@
 package com.howtodoinjava.web.errors;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.ObjectError;
+import org.springframework.validation.FieldError;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
+
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestControllerAdvice
 public class ApplicationExceptionHandler {
 
-  @ExceptionHandler(ItemNotFoundException.class)
-  @ResponseStatus(HttpStatus.NOT_FOUND)
-  String itemNotFoundHandler(ItemNotFoundException ex) {
-    return ex.getMessage();
-  }
-
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
+  ResponseEntity<ProblemDetail> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
     List<String> details = new ArrayList<>();
-    for (ObjectError error : ex.getBindingResult().getAllErrors()) {
+    for (FieldError error : ex.getBindingResult().getFieldErrors()) {
       details.add(error.getDefaultMessage());
     }
-    ErrorResponse error = new ErrorResponse("Validation Failed", details);
-    return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    ProblemDetail body = ProblemDetail
+        .forStatusAndDetail(HttpStatusCode.valueOf(404), ex.getLocalizedMessage());
+    body.setType(URI.create("http://my-app-host.com/errors/bad-request"));
+    body.setTitle("Bad Request");
+    body.setProperty("details", details);
+    return ResponseEntity.badRequest()
+        .body(body);
+  }
+
+  @ExceptionHandler(ItemNotFoundException.class)
+  public ProblemDetail handleItemNotFoundException(
+      ItemNotFoundException ex, WebRequest request) {
+
+    ProblemDetail body = ProblemDetail
+        .forStatusAndDetail(HttpStatusCode.valueOf(404), ex.getLocalizedMessage());
+    body.setType(URI.create("http://my-app-host.com/errors/not-found"));
+    body.setTitle("Item Not Found");
+    body.setProperty("hostname", "localhost");
+    return body;
   }
 }

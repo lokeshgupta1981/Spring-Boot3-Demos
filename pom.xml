@@ -55,6 +55,7 @@
     <module>jsp-demo</module>
     <module>jasper-reports-example</module>
     <module>spring-restclient</module>
+    <module>soap-ws-example</module>
   </modules>
 
   <build>

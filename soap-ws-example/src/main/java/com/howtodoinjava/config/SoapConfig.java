@@ -14,7 +14,7 @@ import org.springframework.xml.xsd.XsdSchema;
 
 @EnableWs
 @Configuration
-public class Config extends WsConfigurerAdapter {
+public class SoapConfig extends WsConfigurerAdapter {
 
   @Bean
   public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
@@ -25,17 +25,17 @@ public class Config extends WsConfigurerAdapter {
   }
 
   @Bean(name = "studentDetailsWsdl")
-  public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema countriesSchema) {
+  public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema studentSchema) {
     DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
     wsdl11Definition.setPortTypeName("StudentDetailsPort");
     wsdl11Definition.setLocationUri("/service/student-details");
     wsdl11Definition.setTargetNamespace("http://www.howtodoinjava.com/xml/school");
-    wsdl11Definition.setSchema(countriesSchema);
+    wsdl11Definition.setSchema(studentSchema);
     return wsdl11Definition;
   }
 
   @Bean
-  public XsdSchema countriesSchema() {
+  public XsdSchema studentSchema() {
     return new SimpleXsdSchema(new ClassPathResource("student.xsd"));
   }
 }

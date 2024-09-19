@@ -1,22 +1,50 @@
 package com.howtodoinjava.app.web;
 
 import com.howtodoinjava.app.model.Employee;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
+
+import java.net.URI;
 
 @RestController
 public class EmployeeController {
 
-  @Autowired
-  WebClient webClient;
+  private final WebClient webClient;
 
-  public void getEmployee(){
+  public EmployeeController(WebClient webClient) {
+    this.webClient = webClient;
+  }
 
+  public void createEmployee(){
 
+    Employee newEmployee = new Employee(1L, "Lokesh Gupta", "Active");
+
+    webClient.post()
+        .uri("/employees")
+        .bodyValue(BodyInserters.fromValue(newEmployee))
+        .retrieve()
+        .toBodilessEntity()
+        .subscribe(
+            responseEntity -> {
+              // Handle success response here
+              HttpStatusCode status = responseEntity.getStatusCode();
+              URI location = responseEntity.getHeaders().getLocation();
+              // handle response as necessary
+            },
+            error -> {
+              // Handle the error here
+              if (error instanceof WebClientResponseException ex) {
+                HttpStatusCode status = ex.getStatusCode();
+                System.out.println("Error Status Code: " + status.value());
+                //...
+              } else {
+                // Handle other types of errors
+                System.err.println("An unexpected error occurred: " + error.getMessage());
+              }
+            }
+        );
   }
 }

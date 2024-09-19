@@ -38,3 +38,4 @@ replay_pid*
 
 **/target
 
+/soap-client-example/src/main/resources/maxresdefault.jpg

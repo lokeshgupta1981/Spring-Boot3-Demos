@@ -67,21 +67,21 @@ class AsyncService {
 
   @Async("asyncExecutor")
   public CompletableFuture<String> getEmployeeName() throws InterruptedException {
-    log.info("Fetching Employee Name...");
+    log.info("Fetching Employee Name using RestClient/WebClient API...");
     Thread.sleep(1000);
     return CompletableFuture.completedFuture("John Doe");
   }
 
   @Async("asyncExecutor")
   public CompletableFuture<String> getEmployeeAddress() throws InterruptedException {
-    log.info("Fetching Employee Address...");
+    log.info("Fetching Employee Address using RestClient/WebClient API...");
     Thread.sleep(1000);
     return CompletableFuture.completedFuture("123 Main St, Cityville");
   }
 
   @Async("asyncExecutor")
   public CompletableFuture<String> getEmployeePhone() throws InterruptedException {
-    log.info("Fetching Employee Phone...");
+    log.info("Fetching Employee Phone using RestClient/WebClient API...");
     Thread.sleep(1000);
     return CompletableFuture.completedFuture("+123456789");
   }
@@ -108,8 +108,10 @@ class AsyncController {
 
     CompletableFuture.allOf(nameFuture, addressFuture, phoneFuture).join();
 
-    return "Name: " + nameFuture.get() + ", Address: " + addressFuture.get() + ", Phone: "
+    String result = "Name: " + nameFuture.get() + ", Address: " + addressFuture.get() + ", Phone: "
       + phoneFuture.get();
+    log.info("All async calls are completed. The combined result is : {}", result);
+    return result;
   }
 }
 

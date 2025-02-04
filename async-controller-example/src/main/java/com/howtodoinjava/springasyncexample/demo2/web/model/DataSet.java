@@ -1,4 +1,4 @@
-package com.howtodoinjava.springasyncexample.web.model;
+package com.howtodoinjava.springasyncexample.demo2.web.model;
 
 import java.math.BigInteger;
 import lombok.AllArgsConstructor;

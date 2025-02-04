@@ -1,4 +1,4 @@
-package com.howtodoinjava.springasyncexample.config;
+package com.howtodoinjava.springasyncexample.demo2.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

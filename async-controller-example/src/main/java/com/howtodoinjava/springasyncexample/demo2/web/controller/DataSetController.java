@@ -1,4 +1,4 @@
-package com.howtodoinjava.springasyncexample.web.controller;
+package com.howtodoinjava.springasyncexample.demo2.web.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import com.howtodoinjava.springasyncexample.web.model.DataSet;
-import com.howtodoinjava.springasyncexample.web.service.DataSetService;
+import com.howtodoinjava.springasyncexample.demo2.web.model.DataSet;
+import com.howtodoinjava.springasyncexample.demo2.web.service.DataSetService;
 
 @RestController
 public class DataSetController {

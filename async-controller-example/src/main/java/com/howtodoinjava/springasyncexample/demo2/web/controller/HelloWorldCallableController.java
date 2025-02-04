@@ -1,10 +1,8 @@
-package com.howtodoinjava.springasyncexample.web.controller;
+package com.howtodoinjava.springasyncexample.demo2.web.controller;
 
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
 public class HelloWorldCallableController 

@@ -1,4 +1,4 @@
-package com.howtodoinjava.springasyncexample.web.controller;
+package com.howtodoinjava.springasyncexample.demo2.web.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.asyncDispatch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -6,8 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.howtodoinjava.springasyncexample.web.model.DataSet;
-import com.howtodoinjava.springasyncexample.web.service.DataSetService;
+import com.howtodoinjava.springasyncexample.demo2.web.model.DataSet;
+import com.howtodoinjava.springasyncexample.demo2.web.service.DataSetService;
 import java.math.BigInteger;
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;

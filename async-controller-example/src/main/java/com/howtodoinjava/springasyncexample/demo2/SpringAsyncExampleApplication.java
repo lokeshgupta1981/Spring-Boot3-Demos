@@ -1,4 +1,4 @@
-package com.howtodoinjava.springasyncexample;
+package com.howtodoinjava.springasyncexample.demo2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

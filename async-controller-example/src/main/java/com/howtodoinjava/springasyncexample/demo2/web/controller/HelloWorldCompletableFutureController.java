@@ -1,4 +1,4 @@
-package com.howtodoinjava.springasyncexample.web.controller;
+package com.howtodoinjava.springasyncexample.demo2.web.controller;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
